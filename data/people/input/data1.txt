@@ -1,0 +1,4 @@
+{"name":"Andy", "age":30}
+{"name":"Michael"}
+{"name":"Justin", "age":19}
+{"name":"zhangsan", "age":30}

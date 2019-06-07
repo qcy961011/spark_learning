@@ -1,0 +1,1 @@
+struct<aid:string,pkgname:string,uptime:bigint,type:int,country:string,gpcategory:string>
