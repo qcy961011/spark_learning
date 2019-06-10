@@ -9,3 +9,9 @@ class SecondarySortKey(val word:String , val count:Int) extends Ordered[Secondar
     }
   }
 }
+
+
+
+class Tese extends Ordering[Tese]{
+  override def compare(x: Tese, y: Tese): Int = ???
+}

@@ -29,6 +29,7 @@ object SparkBroadCaseDemo extends BaseSpark{
       a + b
     })
 
+
     println(reduceRes)
     println(arr) //本地会打印出来，但是集群环境不能使用
 

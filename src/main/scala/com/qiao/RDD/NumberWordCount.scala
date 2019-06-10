@@ -1,6 +1,5 @@
 package com.qiao.RDD
 
-import org.apache.spark.rdd.RDD
 import org.apache.spark.storage.StorageLevel
 import org.apache.spark.{SparkConf, SparkContext}
 
