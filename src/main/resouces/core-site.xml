@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
-<configuration xmlns:xi="http://www.w3.org/2001/XInclude">
+<configuration>
 	<!--主要的-->
 	<property>
 		<name>io.native.lib.available</name>
