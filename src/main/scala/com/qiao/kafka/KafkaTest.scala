@@ -9,7 +9,7 @@ import org.apache.kafka.common.serialization.StringSerializer
 import scala.actors.Actor
 import scala.collection.mutable
 
-class QiaoKafkaProducer(val topic:String ,val name:String) extends Actor{
+class QiaoKafkaProducer(val topic: String, val name: String) extends Actor {
 
   var producer: KafkaProducer[String, String] = _
 
@@ -36,15 +36,15 @@ class QiaoKafkaProducer(val topic:String ,val name:String) extends Actor{
   }
 }
 
-object QiaoKafkaProducer{
-  def apply(topic: String,name:String): QiaoKafkaProducer = new QiaoKafkaProducer(topic,name).init
+object QiaoKafkaProducer {
+  def apply(topic: String, name: String): QiaoKafkaProducer = new QiaoKafkaProducer(topic, name).init
 }
 
-class QiaoKafKaConsumer(val topic:String,val name:String) extends Actor {
+class QiaoKafKaConsumer(val topic: String, val name: String) extends Actor {
 
-  var consumer:ConsumerConnector = _
+  var consumer: ConsumerConnector = _
 
-  def init ={
+  def init = {
     val prop = new Properties()
     prop.put("zookeeper.connect", "nn1.hadoop:2181,nn2.hadoop:2181,s1.hadoop:2181")
     prop.put("group.id", "qiao")
@@ -52,8 +52,9 @@ class QiaoKafKaConsumer(val topic:String,val name:String) extends Actor {
     this.consumer = Consumer.create(new ConsumerConfig(prop))
     this
   }
+
   override def act(): Unit = {
-    val topicCountMap = new mutable.HashMap[String,Int]()
+    val topicCountMap = new mutable.HashMap[String, Int]()
     topicCountMap += topic -> 1
     val createMessageStreams: collection.Map[String, List[KafkaStream[Array[Byte], Array[Byte]]]] = consumer.createMessageStreams(topicCountMap)
     val kafkaStream: KafkaStream[Array[Byte], Array[Byte]] = createMessageStreams.get(topic).get(0)
@@ -65,8 +66,8 @@ class QiaoKafKaConsumer(val topic:String,val name:String) extends Actor {
   }
 }
 
-object QiaoKafKaConsumer{
-  def apply(topic: String,name:String): QiaoKafKaConsumer = new QiaoKafKaConsumer(topic,name).init
+object QiaoKafKaConsumer {
+  def apply(topic: String, name: String): QiaoKafKaConsumer = new QiaoKafKaConsumer(topic, name).init
 }
 
 
@@ -74,12 +75,12 @@ object KafkaTest {
 
   def main(args: Array[String]): Unit = {
     val topic = "Qiao_Test"
-    val producer1 = QiaoKafkaProducer(topic , "Producer_ONE")
-    val producer2 = QiaoKafkaProducer(topic , "Producer_TWO")
-    val producer3 = QiaoKafkaProducer(topic , "Producer_Three")
-    val consumer1 = QiaoKafKaConsumer(topic,"Consumer_ONE")
-    val consumer2 = QiaoKafKaConsumer(topic,"Consumer_TWO")
-    val consumer3 = QiaoKafKaConsumer(topic,"Consumer_Three")
+    val producer1 = QiaoKafkaProducer(topic, "Producer_ONE")
+    val producer2 = QiaoKafkaProducer(topic, "Producer_TWO")
+    val producer3 = QiaoKafkaProducer(topic, "Producer_Three")
+    val consumer1 = QiaoKafKaConsumer(topic, "Consumer_ONE")
+    val consumer2 = QiaoKafKaConsumer(topic, "Consumer_TWO")
+    val consumer3 = QiaoKafKaConsumer(topic, "Consumer_Three")
     consumer1.start()
     consumer2.start()
     consumer3.start()
