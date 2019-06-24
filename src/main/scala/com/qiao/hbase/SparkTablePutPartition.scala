@@ -44,7 +44,7 @@ object SparkTablePutPartition {
       //就会造成list1里面的数据都是最后一次keyOut.set(put.getRow)的结果了
       for (next <- list) {
         val keyOut = new ImmutableBytesWritable()
-        val put = new Put(Bytes.toBytes("spark_tab_part" + next.getString(0)))
+        val put = new Put(Bytes.toBytes("spark_tab_0620" + next.getString(0)))
         put.addColumn(Bytes.toBytes("cf1"), Bytes.toBytes("count"), Bytes.toBytes(next.getLong(1)))
         keyOut.set(put.getRow)
         list1 += ((keyOut, put))

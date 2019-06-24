@@ -19,17 +19,17 @@ object SparkHbaseBulkLoad {
   def main(args: Array[String]): Unit = {
 
     import com.qiao.util.MyPredef.deleteHdfs
-//    val hdfsOutPath = "data/orcData/output/"
-    val hdfsOutPath = args(0)
+    val hdfsOutPath = "data/orcData/output/"
+//    val hdfsOutPath = args(0)
 
     hdfsOutPath.deletePath()
 
-//    val orcPath = "data/orcData/input"
-    val orcPath = args(1)
+    val orcPath = "data/orcData/input"
+//    val orcPath = args(1)
 
 
     val conf = new SparkConf().setAppName("SparkHbaseBulkLoad")
-//    conf.setMaster("local[*]")
+    conf.setMaster("local[*]")
     conf.set("spark.serializer" , classOf[KryoSerializer].getName)
     val sc = new SparkContext(conf)
 
@@ -41,7 +41,7 @@ object SparkHbaseBulkLoad {
 
       for (row <- list) {
         val rk = new ImmutableBytesWritable()
-        rk.set(Bytes.toBytes(s"spark_bulk_${row.getString(1)}"))
+        rk.set(Bytes.toBytes(s"spark_bulk_0620_${row.getString(1)}"))
         val keyValue = new KeyValue(rk.get(), Bytes.toBytes("cf1"), Bytes.toBytes("country"), Bytes.toBytes(4))
         list1 += ((rk, keyValue))
       }
