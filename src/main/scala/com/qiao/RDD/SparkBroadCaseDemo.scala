@@ -10,12 +10,14 @@ object SparkBroadCaseDemo extends BaseSpark{
 
     val arr = ArrayBuffer(1, 2, 3, 4)
 
-    val par = sc.parallelize(arr,4)
+//    val par = sc.parallelize(arr,4)
+
+    val par = sc.makeRDD(arr , 4)
 
     val broad = sc.broadcast(arr)
-    val acc = sc.accumulator(0)
-
-
+    // 过时API不推荐使用
+//    val acc = sc.accumulator(0)
+    val acc = sc.longAccumulator
 
     val reduceRes = par.map(f => {
       val value = broad.value
@@ -28,7 +30,6 @@ object SparkBroadCaseDemo extends BaseSpark{
       acc.add(1) //reduce第一次进入两个元素，所以会减少一次累加器
       a + b
     })
-
 
     println(reduceRes)
     println(arr) //本地会打印出来，但是集群环境不能使用

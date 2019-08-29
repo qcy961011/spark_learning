@@ -30,7 +30,7 @@ object SparkSqlJson {
     count.show()
     count.printSchema()
 
-    count.rdd.repartition(1).saveAsTextFile(outputPath)
+//    count.rdd.repartition(1).saveAsTextFile(outputPath)
 
 
   }
